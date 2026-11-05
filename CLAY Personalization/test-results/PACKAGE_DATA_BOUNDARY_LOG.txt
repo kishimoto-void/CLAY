@@ -1,0 +1,10 @@
+PASS personal_contract_absent
+PASS personal_manifest_absent
+PASS no_personal_data_policy
+PASS no_personalization_dial
+PASS no_retention_dial
+PASS no_profile_store
+PASS no_profile_engine
+PASS synthetic_examples_declared
+PASS runtime_inputs_not_embedded
+RESULT: 9/9 boundary checks pass

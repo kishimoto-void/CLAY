@@ -1,0 +1,5 @@
+STATUS: VALIDATED_HOST_CHECKS_REQUIRED
+PROFILE: work.general@1.0.0
+EXECUTION: NOT_INVOKED
+ACTIVATION: NOT_ACTIVATED
+NOTE: This is a validation/plan-only helper; no Gamma request or activation occurred.

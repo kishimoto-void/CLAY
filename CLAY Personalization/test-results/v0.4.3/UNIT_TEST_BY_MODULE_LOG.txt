@@ -1,0 +1,23 @@
+# Independent unit-test module results — v0.4.3
+
+Each listed module passed when invoked independently. The combined `python -m unittest discover -s tests -v` invocation did not complete within this environment and is therefore not claimed as a successful aggregate run.
+
+| Test module | Tests | Result |
+|---|---:|---|
+| `tests.test_clay_v043_contract` | 24 | PASS |
+| `tests.test_coexistence_contract` | 8 | PASS |
+| `tests.test_completion_exploration_contract` | 17 | PASS |
+| `tests.test_contract_structure` | 36 | PASS |
+| `tests.test_conversation_flow` | 6 | PASS |
+| `tests.test_delta_index` | 13 | PASS |
+| `tests.test_destructive_probes` | 24 | PASS |
+| `tests.test_gamma_index` | 16 | PASS |
+| `tests.test_gamma_profile_bridge` | 37 | PASS |
+| `tests.test_index_three_phases` | 41 | PASS |
+| `tests.test_outcome_learning` | 20 | PASS |
+| `tests.test_safety_topology` | 12 | PASS |
+| `tests.test_v039_collaboration_contract` | 6 | PASS |
+
+**Total independently passing tests: 260 across 13 modules.**
+
+Latest direct reruns in this release copy: `test_completion_exploration_contract` 17/17, `test_coexistence_contract` 8/8, `test_contract_structure` 36/36, `test_clay_v043_contract` 24/24, and `test_gamma_profile_bridge` 37/37. Other modules passed independent runs recorded during the same build/verification cycle.

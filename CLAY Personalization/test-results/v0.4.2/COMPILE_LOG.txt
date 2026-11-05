@@ -1,0 +1,3 @@
+Python compilation: PASS
+Scope: gamma_index, delta_index, safety_plane, tools, interfaces, tests
+Method: python -m compileall -q -f gamma_index delta_index safety_plane tools interfaces tests

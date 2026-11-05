@@ -1,0 +1,4 @@
+PASS: evidence bundle schema meta-validation
+PASS: synthetic evidence example validates
+PASS: numeric_probability without non-empty probability_basis rejected
+PASS: numeric_probability with an explicit basis field passes schema shape validation (calibration quality is not assessed)

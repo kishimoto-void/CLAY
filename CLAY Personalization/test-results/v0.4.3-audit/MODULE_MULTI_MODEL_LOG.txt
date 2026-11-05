@@ -1,0 +1,1 @@
+VALID: manifest contract passed (examples/modules/multi_model_review.example.json)

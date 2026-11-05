@@ -1,0 +1,13 @@
+test_anti_overexpansion_and_explicit_scope_are_both_present (tests.test_interaction_calibration.InteractionCalibrationTests.test_anti_overexpansion_and_explicit_scope_are_both_present) ... ok
+test_common_core_does_not_embed_person_specific_values (tests.test_interaction_calibration.InteractionCalibrationTests.test_common_core_does_not_embed_person_specific_values) ... ok
+test_contract_documents_explain_new_boundaries (tests.test_interaction_calibration.InteractionCalibrationTests.test_contract_documents_explain_new_boundaries) ... ok
+test_initiative_and_verification_are_independent (tests.test_interaction_calibration.InteractionCalibrationTests.test_initiative_and_verification_are_independent) ... ok
+test_legacy_config_matches_canonical (tests.test_interaction_calibration.InteractionCalibrationTests.test_legacy_config_matches_canonical) ... ok
+test_new_vectors_are_unique_and_nonempty (tests.test_interaction_calibration.InteractionCalibrationTests.test_new_vectors_are_unique_and_nonempty) ... ok
+test_tentative_options_are_not_closed_by_default (tests.test_interaction_calibration.InteractionCalibrationTests.test_tentative_options_are_not_closed_by_default) ... ok
+test_vectors_cover_critical_independent_dimensions (tests.test_interaction_calibration.InteractionCalibrationTests.test_vectors_cover_critical_independent_dimensions) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.002s
+
+OK

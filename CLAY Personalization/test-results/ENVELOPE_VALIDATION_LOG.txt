@@ -1,0 +1,2 @@
+VALID: schema and semantic checks passed
+VALID: schema and semantic checks passed

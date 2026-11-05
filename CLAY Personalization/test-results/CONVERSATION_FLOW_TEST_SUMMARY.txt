@@ -1,0 +1,6 @@
+Top Mold v0.3.8 inherited conversation-flow checks
+- Structural conversation-flow tests: 6/6 PASS (included in total 183/183 suite)
+- Synthetic model-level conformance vectors: 12 defined
+- Live LLM behavior trials executed: NO
+- Blinded A/B evaluation executed: NO
+- Interpretation: config and structural consistency passed; live-model behavior uplift is not established.

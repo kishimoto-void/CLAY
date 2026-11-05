@@ -1,0 +1,12 @@
+JSON_PARSE_PASS: 24 files; duplicate keys rejected
+SCHEMA_META_VALID_PASS: 8 schemas
+PASS examples/index_states/control_topology.example.json -> control_topology.schema.json
+PASS examples/index_states/delta_pending_change.example.json -> delta_event.schema.json
+PASS examples/index_states/delta_observation.example.json -> delta_observation.schema.json
+PASS examples/index_states/gamma_handoff.example.json -> gamma_handoff.schema.json
+PASS examples/gamma_profile_import_packet.example.json -> gamma_import_packet.schema.json
+PASS examples/index_states/gamma_index_snapshot.example.json -> gamma_index_snapshot.schema.json
+PASS examples/request_interpretation.example.json -> request_envelope.schema.json
+PASS examples/epistemic_integrity.example.json -> request_envelope.schema.json
+PASS examples/task_profiles/work_profile.example.json -> task_profile.schema.json
+EXAMPLE_SCHEMA_PASS: 9/9

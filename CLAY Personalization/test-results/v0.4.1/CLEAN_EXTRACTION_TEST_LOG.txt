@@ -1,0 +1,12 @@
+CLEAN EXTRACTION TEST
+Archive: clay_personalization_v0.4.1_outcome_learning.zip
+Extracted into a new empty directory before running tests.
+Ran 235 tests in 19.669s
+OK
+{
+  "status": "PASS",
+  "violation_count": 0,
+  "violations": [],
+  "execution_status": "NOT_INVOKED"
+}
+RESULT: 33/33 probes met expectation

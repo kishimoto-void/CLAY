@@ -1,0 +1,4 @@
+VALID: manifest contract passed (examples/modules/code_specialist.example.json)
+VALID: manifest contract passed (examples/modules/multi_model_review.example.json)
+VALID: manifest contract passed (examples/modules/work_workflow.example.json)
+VALID: result contract passed (examples/module_results/blocked_integration.example.json)

@@ -1,0 +1,24 @@
+CLAY Personalization v0.4.0 — final clean extraction verification
+Archive: clay_personalization_v0.4.0_common_core_modules.zip
+ZIP CRC: PASS (archive integrity was checked before extraction)
+
+Unit tests:
+Ran 214 tests — OK
+
+Python compilation:
+PASS: python -m compileall -q gamma_index delta_index safety_plane interfaces tools tests
+
+Module examples:
+3/3 manifest examples PASS
+1/1 module-result example PASS
+
+Inherited core checks:
+Safety topology: PASS, 0 violations; execution NOT_INVOKED
+Request Envelope examples: 2/2 PASS
+Destructive Request Envelope matrix: 33/33 PASS
+Gamma profile bridge: VALIDATED_HOST_CHECKS_REQUIRED; NOT_INVOKED; NOT_ACTIVATED
+
+JSON documents: 36/36 parse PASS
+JSON Schema Draft 2020-12 meta-validation: 11/11 PASS
+
+All results above were run from a fresh extraction of the release archive. These checks cover deterministic local contracts and reference code only. They do not constitute live LLM/provider tests, a production runtime test, or safety certification.

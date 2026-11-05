@@ -1,0 +1,3 @@
+PASS examples/outcome_review.failure.example.json
+PASS examples/outcome_review.success.example.json
+RESULT: 2/2 examples valid

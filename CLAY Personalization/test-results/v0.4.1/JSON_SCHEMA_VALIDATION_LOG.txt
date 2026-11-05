@@ -1,0 +1,13 @@
+PASS schemas/control_topology.schema.json
+PASS schemas/delta_event.schema.json
+PASS schemas/delta_observation.schema.json
+PASS schemas/evidence_bundle.schema.json
+PASS schemas/gamma_handoff.schema.json
+PASS schemas/gamma_import_packet.schema.json
+PASS schemas/gamma_index_snapshot.schema.json
+PASS schemas/module_manifest.schema.json
+PASS schemas/module_result.schema.json
+PASS schemas/outcome_review.schema.json
+PASS schemas/request_envelope.schema.json
+PASS schemas/task_profile.schema.json
+RESULT: 12/12 schemas valid

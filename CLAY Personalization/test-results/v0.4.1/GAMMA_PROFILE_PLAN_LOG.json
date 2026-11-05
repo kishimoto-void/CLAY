@@ -1,0 +1,135 @@
+{
+  "status": "VALIDATED_HOST_CHECKS_REQUIRED",
+  "errors": [],
+  "profile_id": "work.general",
+  "profile_version": "1.0.0",
+  "clay_version": "0.4.1",
+  "top_mold_version": "0.4.1",
+  "activation_scope": "current_task_session",
+  "candidate_overlay_preview": {
+    "candidate_status": "COMPOSED_NOT_ACTIVATED",
+    "profile_id": "work.general",
+    "profile_version": "1.0.0",
+    "activation_scope": "current_task_session",
+    "task_mode": "work",
+    "dials": {
+      "proactiveness": 25,
+      "initiative": 30,
+      "cross_domain_transfer": 35,
+      "generalization": 35,
+      "verification_strictness": 90,
+      "drift_allowance": 50,
+      "detail_structure": 80,
+      "concision": 55,
+      "human_control": 90,
+      "speculation_tolerance": 45,
+      "uncertainty_preservation": 90,
+      "contradiction_preservation": 90,
+      "transformation_fidelity": 90
+    },
+    "output_contract": {
+      "format": "markdown",
+      "sections": [
+        "Goal and scope",
+        "Design or implementation",
+        "Verification",
+        "Limitations"
+      ],
+      "citations_required": true,
+      "tests_required_when_code_changes": true
+    },
+    "workflow_steps": [
+      {
+        "step_id": "scope",
+        "objective": "Identify the requested result, constraints, exclusions, and acceptance criteria.",
+        "required_inputs": [
+          "current task request"
+        ],
+        "expected_outputs": [
+          "task scope",
+          "acceptance criteria"
+        ]
+      },
+      {
+        "step_id": "build",
+        "objective": "Create or revise the requested artifact within the declared scope.",
+        "required_inputs": [
+          "approved source materials",
+          "available tools"
+        ],
+        "expected_outputs": [
+          "artifact",
+          "change summary"
+        ]
+      },
+      {
+        "step_id": "verify",
+        "objective": "Run proportionate checks and report exactly what was and was not verified.",
+        "required_inputs": [
+          "artifact",
+          "test criteria"
+        ],
+        "expected_outputs": [
+          "test results",
+          "limitations"
+        ]
+      }
+    ],
+    "verification_requirements": [
+      "Separate planned work from executed work and verified results.",
+      "Run relevant deterministic tests when code or schemas change.",
+      "Do not infer semantic truth from structural validation alone."
+    ],
+    "additive_constraints": [
+      "Keep task-local context separate from durable personal data.",
+      "Preserve unknowns and unresolved contradictions when material."
+    ],
+    "applied_layers": [
+      "global_defaults",
+      "built_in_task_overlay",
+      "gamma_task_profile",
+      "current_task_overlay"
+    ],
+    "activation_status": "NOT_ACTIVATED"
+  },
+  "host_checks_as_declared_in_packet": {
+    "source_authentication": "not_checked",
+    "resource_access": "not_checked",
+    "permission": "not_checked",
+    "required_capabilities": "not_checked"
+  },
+  "trusted_host_checks_used_for_planning": null,
+  "trusted_host_evidence_ref": null,
+  "trusted_host_checks_supplied_out_of_band": false,
+  "host_check_claims_authenticated_by_this_tool": false,
+  "activation_plan": [
+    "Host resolves the exact Gamma resource reference and confirms current availability.",
+    "Host authenticates the Gamma source through its trusted adapter; the JSON packet alone is not proof.",
+    "Host checks the user approval/permission scope for this task session.",
+    "Host confirms every declared required capability is actually available; labels in the profile are not proof.",
+    "CLAY stages the profile as a non-authoritative task overlay.",
+    "Compose: CLAY base defaults -> built-in task overlay -> selected Gamma overlay -> current task-local instructions.",
+    "Reject any attempt to change authority, permissions, safety gates, or host capabilities.",
+    "Commit the active overlay atomically; on failure retain the previous active overlay.",
+    "Emit PROFILE_ACTIVATED with profile ID/version/digest to Delta only after host confirms activation."
+  ],
+  "delta_events": [
+    "PROFILE_CANDIDATE_RECEIVED",
+    "PROFILE_VALIDATED",
+    "PROFILE_REJECTED",
+    "PROFILE_ACTIVATED (host-confirmed only)",
+    "PROFILE_ACTIVATION_FAILED",
+    "PROFILE_UPDATE_AVAILABLE",
+    "PROFILE_DEACTIVATED"
+  ],
+  "execution_status": "NOT_INVOKED",
+  "activation_status": "NOT_ACTIVATED",
+  "host_checks_required": true,
+  "host_activation_required": false,
+  "limits": [
+    "This helper does not connect to Gamma Index or authenticate its source.",
+    "It does not load, persist, merge, or activate profiles.",
+    "Host-check fields in the packet are untrusted declarations; out-of-band host decisions are trusted only by the integrating caller, not authenticated by this helper.",
+    "Structural validation and a matching digest do not establish source authenticity or factual correctness."
+  ]
+}

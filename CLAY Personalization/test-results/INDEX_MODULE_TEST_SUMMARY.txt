@@ -1,0 +1,7 @@
+Top Mold v0.3.8 Gamma/Delta three-phase test summary
+- Full unit/structural suite: 183/183 PASS
+- Gamma/Delta three-phase focused tests: 41/41 PASS
+- Safety topology tests: 12/12 PASS (including 9 destructive topology mutations rejected)
+- Request-envelope destructive probes: 33/33 PASS
+- Topology validator: PASS, violation_count=0
+- Persistent storage, access-control enforcement, remote source authentication, and live activation are not implemented.

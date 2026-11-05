@@ -1,0 +1,9 @@
+# Clean extraction validation — CLAY Personalization v0.4.3
+
+- Archive entries: 187
+- ZIP CRC test: PASS
+- Clean extraction: PASS
+- Clean-copy modules passed: `test_completion_exploration_contract` 17/17; `test_coexistence_contract` 8/8; `test_contract_structure` 36/36; `test_gamma_profile_bridge` 37/37.
+- Clean-copy verified total: 98/98 across four modules.
+- Additional clean-copy attempt: `test_clay_v043_contract` reached the 45-second command timeout and is not counted as passing in this clean-copy record. The corresponding working-tree run passed 24/24 (23.967 seconds).
+- This is static package verification, not live LLM evaluation or production/runtime certification.

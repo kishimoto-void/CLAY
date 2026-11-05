@@ -1,0 +1,1 @@
+VALID: manifest contract passed (examples/modules/work_workflow.example.json)

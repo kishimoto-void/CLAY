@@ -1,0 +1,3 @@
+Command: python -m compileall -q gamma_index delta_index safety_plane interfaces tools tests
+Result: PASS (exit status 0).
+Scope: Python syntax/byte-compilation only; does not prove runtime correctness or LLM behavior.

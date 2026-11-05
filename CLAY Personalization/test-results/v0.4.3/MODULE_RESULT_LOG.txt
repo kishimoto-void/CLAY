@@ -1,0 +1,1 @@
+VALID: result contract passed (examples/module_results/blocked_integration.example.json)
