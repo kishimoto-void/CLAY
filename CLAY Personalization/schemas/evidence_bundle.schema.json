@@ -1,0 +1,228 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/top-mold/evidence-bundle/v0.1/schema.json",
+  "title": "Top Mold Evidence Bundle v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "claim",
+    "evidence",
+    "assessment"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "top-mold/evidence-bundle/v0.1"
+    },
+    "bundle_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "statement",
+        "claim_type",
+        "scope"
+      ],
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "claim_type": {
+          "enum": [
+            "subjective_preference",
+            "first_person_experience",
+            "self_assessment",
+            "observable_fact",
+            "behavioral_pattern",
+            "prediction",
+            "causal_hypothesis",
+            "normative_judgment"
+          ]
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "time_scope": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 256
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidence_id",
+          "relation",
+          "source_kind",
+          "observation_axis",
+          "source_ref",
+          "scope",
+          "independence_group_id"
+        ],
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "relation": {
+            "enum": [
+              "supports",
+              "opposes",
+              "contextualizes",
+              "does_not_address"
+            ]
+          },
+          "source_kind": {
+            "enum": [
+              "self_report",
+              "direct_observation",
+              "third_party_report",
+              "institutional_record",
+              "measurement",
+              "published_source",
+              "model_inference",
+              "other"
+            ]
+          },
+          "observation_axis": {
+            "enum": [
+              "self_report",
+              "direct_behavior",
+              "independent_third_party",
+              "institutional_outcome",
+              "measurement",
+              "longitudinal_pattern",
+              "contextual_replication",
+              "source_document",
+              "model_inference",
+              "other"
+            ]
+          },
+          "source_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "observed_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "independence_group_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "relevance": {
+            "enum": [
+              "direct",
+              "indirect",
+              "low",
+              "unknown"
+            ]
+          },
+          "reliability_note": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "limitations": {
+            "type": "array",
+            "maxItems": 20,
+            "items": {
+              "type": "string",
+              "maxLength": 500
+            }
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        }
+      }
+    },
+    "assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "rationale",
+        "generalization_boundary",
+        "open_questions"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "NOT_ASSESSED",
+            "INSUFFICIENT_EVIDENCE",
+            "TENTATIVE",
+            "SUPPORTED",
+            "STRONGLY_SUPPORTED_WITHIN_SCOPE",
+            "MIXED_OR_CONFLICTING"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "generalization_boundary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1500
+        },
+        "open_questions": {
+          "type": "array",
+          "maxItems": 30,
+          "items": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        },
+        "numeric_probability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "probability_basis": {
+          "type": "string",
+          "maxLength": 2000,
+          "minLength": 1
+        }
+      },
+      "dependentRequired": {
+        "numeric_probability": [
+          "probability_basis"
+        ]
+      }
+    }
+  }
+}

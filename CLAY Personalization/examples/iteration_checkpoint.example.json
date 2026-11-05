@@ -1,0 +1,71 @@
+{
+  "schema_version": "clay/iteration-checkpoint/v1",
+  "checkpoint_id": "iter-000043",
+  "created_at": "2026-11-05T00:00:00+09:00",
+  "project_ref": "synthetic:clay-personalization",
+  "iteration": 4,
+  "deliverable_state": "COMPLETE_FOR_SCOPE",
+  "project_state": "OPEN",
+  "acceptance_criteria": [
+    {
+      "criterion_id": "spec",
+      "description": "The iteration policy is documented and referenced by the LLM entry guide.",
+      "state": "MET",
+      "evidence_refs": [
+        "file:COMPLETION_AND_CONTINUING_EXPLORATION.md",
+        "file:LLM_README.md"
+      ]
+    },
+    {
+      "criterion_id": "validation",
+      "description": "The schema and synthetic checkpoint example validate locally.",
+      "state": "MET",
+      "evidence_refs": [
+        "test:test_iteration_checkpoint_contract"
+      ]
+    },
+    {
+      "criterion_id": "runtime",
+      "description": "Live provider behavior follows the new policy.",
+      "state": "NOT_APPLICABLE"
+    }
+  ],
+  "effective_patterns": [
+    {
+      "pattern": "Keep a known-good archive, make a bounded change, and test the newly affected contract plus adjacent regression surfaces.",
+      "scope": "PROJECT",
+      "replication_conditions": [
+        "The base archive is identified and checksummed.",
+        "The change has an explicit acceptance scope.",
+        "Clean extraction and documented tests are run after packaging."
+      ],
+      "evidence_refs": [
+        "test:clean-extraction",
+        "test:regression-suite"
+      ],
+      "limits": "Local package validation does not prove live LLM adherence or production safety."
+    }
+  ],
+  "failure_prevention": [
+    {
+      "failure_pattern": "Version references and CLI defaults can remain pinned to a previous release.",
+      "prevention_or_detection": "Update current-version references in docs, config, validator defaults, and tests together.",
+      "verification": "Search the extracted release for stale current-version markers and run the CLI default-version test.",
+      "evidence_refs": [
+        "test:version-reference-audit"
+      ],
+      "cause_status": "OBSERVED_FACTOR"
+    }
+  ],
+  "unknowns": [
+    "Live user/LLM collaboration outcomes and long-term cognitive influence have not been evaluated by this synthetic example."
+  ],
+  "next_step": {
+    "mode": "EXPLORE",
+    "proposal": "A future live-adapter evaluation could test whether the new review loop preserves conversational freedom without causing excessive reviews.",
+    "decision_status": "PROPOSED",
+    "scope_change_requires_confirmation": true
+  },
+  "review_status": "REVIEWED",
+  "notes": "Synthetic example only; it is not a claim that this package has passed a live provider evaluation."
+}

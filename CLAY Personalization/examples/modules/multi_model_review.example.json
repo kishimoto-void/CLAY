@@ -1,0 +1,95 @@
+{
+  "schema_version": "clay/module-manifest/v1",
+  "module_id": "analysis.multi_model_review",
+  "name": "CLAY Multi-Model Review (synthetic contract example)",
+  "module_version": "0.1.0",
+  "kind": "composite",
+  "purpose": "Coordinate optional bounded model roles for independent analysis and criticism while retaining unresolved differences and evidence dependencies.",
+  "capabilities": [
+    {
+      "capability_id": "analysis.parallel_hypotheses",
+      "description": "Generate separately attributed candidate explanations."
+    },
+    {
+      "capability_id": "analysis.cross_review",
+      "description": "Review outputs against shared criteria and search for material omissions or counterexamples."
+    }
+  ],
+  "out_of_scope": [
+    "Treating model majority as calibrated truth",
+    "Granting permissions or authorizing external execution",
+    "Claiming independent confirmation when models share sources or assumptions"
+  ],
+  "implementation_modes": [
+    "multi_model",
+    "hybrid"
+  ],
+  "inputs": [
+    {
+      "name": "question",
+      "required": true,
+      "description": "A bounded question suitable for independent analysis."
+    },
+    {
+      "name": "evidence",
+      "required": false,
+      "description": "The minimal evidence set and known provenance."
+    },
+    {
+      "name": "evaluation_criteria",
+      "required": true,
+      "description": "Explicit criteria for comparing outputs."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "model_findings",
+      "description": "Separately attributed model outputs with relevant dependencies."
+    },
+    {
+      "name": "disagreements",
+      "description": "Unresolved disagreements and evidence needed to evaluate them."
+    },
+    {
+      "name": "synthesis",
+      "description": "A bounded synthesis that does not use vote count as truth."
+    }
+  ],
+  "dependencies": [],
+  "clay_core_range": "0.4.x",
+  "risk_class": "high",
+  "verification_requirements": [
+    "Record common sources and shared assumptions where known.",
+    "Do not use vote count as confidence.",
+    "Preserve disagreement and independently verify material factual claims."
+  ],
+  "behavior_profile": {
+    "separate_from_capability": true,
+    "supported_controls": [
+      "tone",
+      "verbosity",
+      "format",
+      "initiative",
+      "collaboration_style"
+    ],
+    "may_override_common_core": false
+  },
+  "authority": {
+    "may_grant_permissions": false,
+    "may_modify_common_core": false,
+    "may_disable_safety_plane": false,
+    "external_action_default": "forbidden_without_host_approval"
+  },
+  "data_handling": {
+    "default_scope": "task_only",
+    "persistent_personal_data": false
+  },
+  "failure_contract": {
+    "declares_typed_blockers": true,
+    "retry_policy": "bounded_host_policy",
+    "partial_results_supported": true
+  },
+  "notes": [
+    "Synthetic example only; no providers, credentials, models, or orchestration runtime are connected."
+  ]
+}

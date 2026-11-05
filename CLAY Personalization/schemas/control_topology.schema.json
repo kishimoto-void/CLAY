@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Top Mold Gamma Delta Safety Topology",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "control_flow", "modules", "dependencies"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "control_flow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sequential_pipeline", "cross_cutting_safety_plane", "delta_event_route"],
+      "properties": {
+        "sequential_pipeline": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "cross_cutting_safety_plane": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "delta_event_route": {"type": "string", "minLength": 1}
+      }
+    },
+    "modules": {"type": "object", "minProperties": 1},
+    "dependencies": {"type": "object", "additionalProperties": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}}
+  }
+}

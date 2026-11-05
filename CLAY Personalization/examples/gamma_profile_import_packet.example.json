@@ -1,0 +1,128 @@
+{
+  "schema_version": "top-mold/gamma-import-packet/1.0",
+  "request": {
+    "request_id": "req-work-profile-demo-001",
+    "requested_profile_id": "work.general",
+    "requested_profile_version": "1.0.0",
+    "selection_source": "explicit_user_request",
+    "activation_scope": "current_task_session",
+    "activation_intent": "activate_after_validation",
+    "requested_task_mode": "work"
+  },
+  "retrieval": {
+    "provider": "gamma_index",
+    "resource_ref": "gamma://task-profiles/work.general",
+    "retrieval_status": "received",
+    "retrieved_at": "2026-11-03T13:00:00+09:00",
+    "returned_etag": "synthetic-example-etag"
+  },
+  "integrity": {
+    "algorithm": "sha256-canonical-json-v1",
+    "profile_sha256": "4ca8caa0eef80c43643f53c38762c5ab2fd7cabbfab62ce281edc95f5c451760"
+  },
+  "host_checks": {
+    "source_authentication": "not_checked",
+    "resource_access": "not_checked",
+    "permission": "not_checked",
+    "required_capabilities": "not_checked"
+  },
+  "profile": {
+    "schema_version": "top-mold/task-profile/1.0",
+    "profile_id": "work.general",
+    "profile_version": "1.0.0",
+    "profile_kind": "task_domain",
+    "display_name": "Work Mode — General",
+    "purpose": "A synthetic task-domain overlay for structured professional work. It is not a personal profile.",
+    "scope": {
+      "task_modes": [
+        "work",
+        "verify",
+        "design"
+      ],
+      "session_only": true,
+      "contains_personal_data": false,
+      "excluded_uses": [
+        "Do not treat this profile as identity, biography, or user-preference data.",
+        "Do not authorize external actions or override host permissions."
+      ]
+    },
+    "compatibility": {
+      "top_mold_min_version": "0.3.4",
+      "top_mold_max_version": "0.4.99"
+    },
+    "required_capabilities": [
+      "structured_analysis",
+      "artifact_creation",
+      "verification_reporting"
+    ],
+    "overlay": {
+      "task_mode": "work",
+      "dial_overrides": {
+        "proactiveness": 25,
+        "initiative": 30,
+        "verification_strictness": 90,
+        "detail_structure": 80,
+        "uncertainty_preservation": 90,
+        "contradiction_preservation": 90,
+        "transformation_fidelity": 90
+      },
+      "output_contract": {
+        "format": "markdown",
+        "sections": [
+          "Goal and scope",
+          "Design or implementation",
+          "Verification",
+          "Limitations"
+        ],
+        "citations_required": true,
+        "tests_required_when_code_changes": true
+      },
+      "workflow_steps": [
+        {
+          "step_id": "scope",
+          "objective": "Identify the requested result, constraints, exclusions, and acceptance criteria.",
+          "required_inputs": [
+            "current task request"
+          ],
+          "expected_outputs": [
+            "task scope",
+            "acceptance criteria"
+          ]
+        },
+        {
+          "step_id": "build",
+          "objective": "Create or revise the requested artifact within the declared scope.",
+          "required_inputs": [
+            "approved source materials",
+            "available tools"
+          ],
+          "expected_outputs": [
+            "artifact",
+            "change summary"
+          ]
+        },
+        {
+          "step_id": "verify",
+          "objective": "Run proportionate checks and report exactly what was and was not verified.",
+          "required_inputs": [
+            "artifact",
+            "test criteria"
+          ],
+          "expected_outputs": [
+            "test results",
+            "limitations"
+          ]
+        }
+      ],
+      "verification_requirements": [
+        "Separate planned work from executed work and verified results.",
+        "Run relevant deterministic tests when code or schemas change.",
+        "Do not infer semantic truth from structural validation alone."
+      ],
+      "additive_constraints": [
+        "Keep task-local context separate from durable personal data.",
+        "Preserve unknowns and unresolved contradictions when material."
+      ]
+    }
+  }
+}

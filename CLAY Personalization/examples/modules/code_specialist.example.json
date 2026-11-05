@@ -1,0 +1,105 @@
+{
+  "schema_version": "clay/module-manifest/v1",
+  "module_id": "code.specialist",
+  "name": "CLAY Code Specialist (synthetic contract example)",
+  "module_version": "0.1.0",
+  "kind": "domain_specialist",
+  "purpose": "Support code design, implementation planning, debugging, and proportionate test planning while preserving the Common Core and host boundaries.",
+  "capabilities": [
+    {
+      "capability_id": "code.design",
+      "description": "Compare bounded implementation approaches and document trade-offs."
+    },
+    {
+      "capability_id": "code.debug",
+      "description": "Analyze supplied code and observed errors; distinguish confirmed causes from hypotheses."
+    },
+    {
+      "capability_id": "code.test_design",
+      "description": "Design unit, integration, regression, and adversarial test cases."
+    }
+  ],
+  "out_of_scope": [
+    "Claiming code was executed without an execution result",
+    "Accessing repositories or systems without host capability and permission",
+    "Guaranteeing correctness or production security from static review alone"
+  ],
+  "implementation_modes": [
+    "single_model",
+    "multi_model",
+    "deterministic_code",
+    "external_tool",
+    "hybrid"
+  ],
+  "inputs": [
+    {
+      "name": "task_goal",
+      "required": true,
+      "description": "The requested code outcome and acceptance criteria."
+    },
+    {
+      "name": "source_material",
+      "required": false,
+      "description": "Code, logs, files, or error details actually supplied or accessible."
+    },
+    {
+      "name": "constraints",
+      "required": false,
+      "description": "Runtime, language, compatibility, security, and scope constraints."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "analysis",
+      "description": "Scoped findings with source/inference/hypothesis distinctions."
+    },
+    {
+      "name": "change_or_plan",
+      "description": "Proposed implementation or test plan; execution state is explicit."
+    },
+    {
+      "name": "verification_record",
+      "description": "Actual checks run, outcomes, and checks not performed."
+    }
+  ],
+  "dependencies": [],
+  "clay_core_range": "0.4.x",
+  "risk_class": "moderate",
+  "verification_requirements": [
+    "Do not claim execution without a host result.",
+    "Run or specify tests proportionate to the change.",
+    "Preserve unresolved causes and report unverified assumptions."
+  ],
+  "behavior_profile": {
+    "separate_from_capability": true,
+    "supported_controls": [
+      "tone",
+      "verbosity",
+      "format",
+      "initiative",
+      "question_frequency",
+      "teaching_style",
+      "collaboration_style"
+    ],
+    "may_override_common_core": false
+  },
+  "authority": {
+    "may_grant_permissions": false,
+    "may_modify_common_core": false,
+    "may_disable_safety_plane": false,
+    "external_action_default": "forbidden_without_host_approval"
+  },
+  "data_handling": {
+    "default_scope": "task_only",
+    "persistent_personal_data": false
+  },
+  "failure_contract": {
+    "declares_typed_blockers": true,
+    "retry_policy": "bounded_host_policy",
+    "partial_results_supported": true
+  },
+  "notes": [
+    "Synthetic example only; no code execution or provider integration is included.",
+    "The same capability can be paired with different communication styles without changing technical authority."
+  ]
+}

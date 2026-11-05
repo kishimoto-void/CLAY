@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "control_flow": {
+    "sequential_pipeline": ["gamma_index", "top_mold_core", "task_processors", "delta_index"],
+    "cross_cutting_safety_plane": [
+      "hard_safety_override",
+      "risk_boundary_engine",
+      "recovery_path_engine",
+      "situational_verification",
+      "capability_declaration"
+    ],
+    "delta_event_route": "advisory_observation_bus"
+  },
+  "modules": {
+    "gamma_index": {"role": "RESOURCE_INDEX_AND_HOLD_PRESERVATION"},
+    "top_mold_core": {"role": "VALIDATE_COMPOSE_AUTHORIZE_ACTIVATION"},
+    "task_processors": {"role": "TASK_EXECUTION"},
+    "delta_index": {
+      "role": "OBSERVER_ONLY",
+      "can_authorize": false,
+      "can_activate": false,
+      "can_mutate_active_profile": false,
+      "can_disable_safety": false
+    },
+    "hard_safety_override": {"enabled": true, "authority_scope": "GLOBAL_NON_DELEGABLE"},
+    "risk_boundary_engine": {"enabled": true, "authority_scope": "GLOBAL_NON_DELEGABLE"},
+    "recovery_path_engine": {"enabled": true, "authority_scope": "GLOBAL_NON_DELEGABLE"},
+    "situational_verification": {"enabled": true, "authority_scope": "GLOBAL_NON_DELEGABLE"},
+    "capability_declaration": {"enabled": true, "authority_scope": "GLOBAL_NON_DELEGABLE"}
+  },
+  "dependencies": {
+    "gamma_index": ["gamma_registry"],
+    "top_mold_core": ["gamma_index", "profile_validator", "host_policy_gate"],
+    "task_processors": ["top_mold_core", "host_capability_registry"],
+    "delta_index": ["top_mold_event_bus", "host_observation_bus"],
+    "hard_safety_override": ["host_safety_policy", "trusted_observation_bus"],
+    "risk_boundary_engine": ["host_safety_policy", "situational_verification", "capability_declaration"],
+    "recovery_path_engine": ["risk_boundary_engine", "capability_declaration", "host_capability_registry"],
+    "situational_verification": ["trusted_observation_bus"],
+    "capability_declaration": ["host_capability_registry"]
+  }
+}

@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Delta Index Observation Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "target_id",
+    "kind",
+    "status",
+    "prior_version",
+    "prior_digest",
+    "prior_source_ref",
+    "candidate_version",
+    "candidate_digest",
+    "source_ref",
+    "observed_at",
+    "hold_reason",
+    "hold_source",
+    "open_questions",
+    "resolution",
+    "evidence_ref",
+    "reconciled_at"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^delta-[0-9]{6,}$"
+    },
+    "target_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "kind": {
+      "enum": [
+        "BASELINE_CANDIDATE",
+        "CHANGE_CANDIDATE",
+        "NO_CHANGE"
+      ]
+    },
+    "status": {
+      "enum": [
+        "PENDING_REVIEW",
+        "HELD",
+        "CONFIRMED",
+        "REJECTED",
+        "SUPERSEDED"
+      ]
+    },
+    "prior_version": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 64
+    },
+    "prior_digest": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "candidate_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "candidate_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "hold_reason": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 256
+    },
+    "open_questions": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2000
+      }
+    },
+    "resolution": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 2000
+    },
+    "evidence_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 2048
+    },
+    "reconciled_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "prior_source_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "hold_source": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "SYSTEM_COMPETITION",
+        "USER",
+        "STALE_BASE",
+        null
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "PENDING_REVIEW",
+              "HELD"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "open_questions": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "CONFIRMED",
+              "REJECTED",
+              "SUPERSEDED"
+            ]
+          },
+          "kind": {
+            "not": {
+              "const": "NO_CHANGE"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "resolution": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reconciled_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "HELD"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hold_reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "hold_source": {
+            "enum": [
+              "SYSTEM_COMPETITION",
+              "USER",
+              "STALE_BASE"
+            ]
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "hold_reason": {
+            "type": "null"
+          },
+          "hold_source": {
+            "const": null
+          }
+        }
+      }
+    }
+  ]
+}

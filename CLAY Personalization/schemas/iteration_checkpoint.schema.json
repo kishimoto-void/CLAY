@@ -1,0 +1,351 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:clay:iteration-checkpoint:v1",
+  "title": "CLAY Iteration Checkpoint v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "checkpoint_id",
+    "created_at",
+    "project_ref",
+    "iteration",
+    "deliverable_state",
+    "project_state",
+    "acceptance_criteria",
+    "effective_patterns",
+    "failure_prevention",
+    "unknowns",
+    "next_step",
+    "review_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "clay/iteration-checkpoint/v1"
+    },
+    "checkpoint_id": {
+      "type": "string",
+      "pattern": "^iter-[0-9]{6,}$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "project_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "iteration": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "deliverable_state": {
+      "enum": [
+        "COMPLETE_FOR_SCOPE",
+        "PARTIAL",
+        "BLOCKED",
+        "IN_PROGRESS",
+        "UNVERIFIED"
+      ]
+    },
+    "project_state": {
+      "enum": [
+        "OPEN",
+        "PAUSED",
+        "CLOSED",
+        "UNKNOWN"
+      ]
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "criterion_id",
+          "description",
+          "state"
+        ],
+        "properties": {
+          "criterion_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]{1,80}$"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "state": {
+            "enum": [
+              "MET",
+              "NOT_MET",
+              "UNKNOWN",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          }
+        }
+      }
+    },
+    "effective_patterns": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "pattern",
+          "scope",
+          "replication_conditions",
+          "evidence_refs",
+          "limits"
+        ],
+        "properties": {
+          "pattern": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500
+          },
+          "scope": {
+            "enum": [
+              "THIS_ITERATION",
+              "TASK_SERIES",
+              "PROJECT"
+            ]
+          },
+          "replication_conditions": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 10,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          },
+          "evidence_refs": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          },
+          "limits": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        }
+      }
+    },
+    "failure_prevention": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "failure_pattern",
+          "cause_status",
+          "prevention_or_detection",
+          "verification",
+          "evidence_refs"
+        ],
+        "properties": {
+          "failure_pattern": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500
+          },
+          "prevention_or_detection": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500
+          },
+          "verification": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "evidence_refs": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          },
+          "cause_status": {
+            "enum": [
+              "OBSERVED_FACTOR",
+              "SUPPORTED_INFERENCE",
+              "HYPOTHESIS",
+              "UNKNOWN"
+            ]
+          }
+        }
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1000
+      }
+    },
+    "next_step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "proposal",
+        "decision_status",
+        "scope_change_requires_confirmation"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "CONTINUE",
+            "EXPLORE",
+            "STABILIZE",
+            "PAUSE",
+            "CLOSE",
+            "NONE"
+          ]
+        },
+        "proposal": {
+          "type": "string",
+          "maxLength": 1500
+        },
+        "decision_status": {
+          "enum": [
+            "NOT_NEEDED",
+            "PROPOSED",
+            "CONFIRMED",
+            "REJECTED",
+            "DEFERRED"
+          ]
+        },
+        "scope_change_requires_confirmation": {
+          "const": true
+        }
+      }
+    },
+    "review_status": {
+      "enum": [
+        "REVIEWED",
+        "NOT_NEEDED",
+        "USER_DECLINED",
+        "DEFERRED"
+      ]
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 2000
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "deliverable_state": {
+            "const": "COMPLETE_FOR_SCOPE"
+          }
+        },
+        "required": [
+          "deliverable_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "acceptance_criteria": {
+            "items": {
+              "properties": {
+                "state": {
+                  "enum": [
+                    "MET",
+                    "NOT_APPLICABLE"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "project_state": {
+            "const": "CLOSED"
+          }
+        },
+        "required": [
+          "project_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "next_step": {
+            "properties": {
+              "mode": {
+                "enum": [
+                  "CLOSE",
+                  "NONE"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "next_step": {
+            "properties": {
+              "decision_status": {
+                "const": "PROPOSED"
+              }
+            },
+            "required": [
+              "decision_status"
+            ]
+          }
+        },
+        "required": [
+          "next_step"
+        ]
+      },
+      "then": {
+        "properties": {
+          "next_step": {
+            "properties": {
+              "proposal": {
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

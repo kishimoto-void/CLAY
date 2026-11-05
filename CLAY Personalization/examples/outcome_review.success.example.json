@@ -1,0 +1,99 @@
+{
+  "schema_version": "clay/outcome-review/v1",
+  "review_id": "aar-000002",
+  "created_at": "2026-11-04T12:05:00+09:00",
+  "task_ref": "example:documentation-build-02",
+  "scope": "TASK_ATTEMPT",
+  "goal": "Produce a readable package guide and a repeatable local verification command.",
+  "success_criteria": [
+    {
+      "criterion_id": "guide.exists",
+      "description": "The guide explains entry points and reading order.",
+      "state": "MET",
+      "evidence_refs": [
+        "file:LLM_README.md"
+      ]
+    },
+    {
+      "criterion_id": "tests.repeat",
+      "description": "The documented test command completes successfully in a clean extraction.",
+      "state": "MET",
+      "evidence_refs": [
+        "log:clean-extraction-01"
+      ]
+    }
+  ],
+  "outcome": "SUCCESS",
+  "observed_result": "The guide is present and the documented clean-extraction test command completed successfully in the test environment.",
+  "evidence_refs": [
+    "file:LLM_README.md",
+    "log:clean-extraction-01"
+  ],
+  "contributing_factors": [
+    {
+      "factor_id": "factor.order",
+      "description": "The guide gives the LLM a clear reading order and separates normative contracts from compatibility files.",
+      "epistemic_status": "OBSERVED_FACTOR",
+      "locus": "SHARED_PROCESS",
+      "evidence_refs": [
+        "file:LLM_README.md"
+      ]
+    },
+    {
+      "factor_id": "factor.clean",
+      "description": "The archive was extracted to a clean directory before the test command was run.",
+      "epistemic_status": "OBSERVED_FACTOR",
+      "locus": "ENVIRONMENT",
+      "evidence_refs": [
+        "log:clean-extraction-01"
+      ]
+    }
+  ],
+  "learnings": [
+    {
+      "kind": "EFFECTIVE_PATTERN",
+      "statement": "Keep an LLM entry-point guide with an explicit reading order and a clean-extraction verification command.",
+      "scope": "CURRENT_TASK",
+      "evidence_refs": [
+        "file:LLM_README.md",
+        "log:clean-extraction-01"
+      ]
+    }
+  ],
+  "next_action": {
+    "action": "NONE",
+    "description": "No additional correction is needed for this attempt; retain the pattern only as a task-local candidate.",
+    "expected_observation": null,
+    "depends_on_new_condition": false
+  },
+  "adaptation": {
+    "target_layer": "TASK_STRATEGY",
+    "scope": "CURRENT_TASK",
+    "change": "Reuse the reading-order plus clean-extraction check for the next package revision, then verify again.",
+    "approval_required": false,
+    "applied": false
+  },
+  "review_status": "DRAFT",
+  "notes": "Synthetic fixture only. This success does not prove live model adherence or general effectiveness across projects.",
+  "process_review": {
+    "assessment": "SOUND",
+    "observations": [
+      {
+        "area": "PREPARATION",
+        "assessment": "EFFECTIVE",
+        "description": "The reading order and acceptance criteria were written before the clean extraction check.",
+        "evidence_refs": [
+          "file:LLM_README.md"
+        ]
+      },
+      {
+        "area": "VERIFICATION",
+        "assessment": "EFFECTIVE",
+        "description": "The archive was extracted independently and the documented test command was run.",
+        "evidence_refs": [
+          "log:clean-extraction-01"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "event_id": "delta-000002",
+  "target_id": "active_profile:work.general",
+  "kind": "CHANGE_CANDIDATE",
+  "status": "HELD",
+  "prior_version": "1.0.0",
+  "prior_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "prior_source_ref": "host://profile-snapshot/work/1.0.0",
+  "candidate_version": "1.1.0",
+  "candidate_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "source_ref": "gamma-resource:work.general@1.1.0",
+  "observed_at": "2026-11-03T06:00:00+00:00",
+  "hold_reason": "COMPETING_CANDIDATES",
+  "open_questions": [
+    "Which candidate is authoritative for this target?",
+    "Does the new version remain compatible with current task constraints?"
+  ],
+  "resolution": null,
+  "evidence_ref": null,
+  "reconciled_at": null,
+  "hold_source": "SYSTEM_COMPETITION"
+}

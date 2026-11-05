@@ -1,0 +1,330 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:clay:module-result:v1",
+  "title": "CLAY Module Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "module_id",
+    "module_version",
+    "status",
+    "summary",
+    "claims",
+    "blockers",
+    "verification",
+    "next_action"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "clay/module-result/v1"
+    },
+    "module_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$",
+      "maxLength": 80
+    },
+    "module_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$",
+      "maxLength": 48
+    },
+    "status": {
+      "enum": [
+        "COMPLETED",
+        "PARTIAL",
+        "CLARIFICATION_REQUIRED",
+        "BLOCKED",
+        "UNSUPPORTED",
+        "FAILED"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "claims": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claim_id",
+          "statement",
+          "epistemic_status"
+        ],
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]{1,80}$"
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500
+          },
+          "epistemic_status": {
+            "enum": [
+              "SOURCE_FACT",
+              "OBSERVATION",
+              "RETRIEVED_EVIDENCE",
+              "INFERENCE",
+              "HYPOTHESIS",
+              "UNVERIFIED",
+              "UNKNOWN"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          },
+          "scope": {
+            "type": "string",
+            "maxLength": 500
+          }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "maxItems": 40,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "maxItems": 40,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "diagnosis_state",
+          "explanation",
+          "missing_requirements",
+          "retryability"
+        ],
+        "properties": {
+          "code": {
+            "enum": [
+              "INPUT_MISSING",
+              "RESOURCE_UNAVAILABLE",
+              "CAPABILITY_UNAVAILABLE",
+              "PERMISSION_DENIED",
+              "POLICY_BLOCKED",
+              "CONTRACT_INVALID",
+              "DEPENDENCY_FAILED",
+              "TIMEOUT",
+              "CONFLICT_UNRESOLVED",
+              "STALE_INPUT",
+              "VERIFICATION_FAILED",
+              "UNSUPPORTED_OPERATION",
+              "EXECUTION_ERROR",
+              "UNKNOWN_FAILURE"
+            ]
+          },
+          "diagnosis_state": {
+            "enum": [
+              "CONFIRMED",
+              "SUSPECTED",
+              "UNKNOWN"
+            ]
+          },
+          "explanation": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500
+          },
+          "missing_requirements": {
+            "type": "array",
+            "maxItems": 20,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          },
+          "what_was_checked": {
+            "type": "array",
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          },
+          "retryability": {
+            "enum": [
+              "NEVER",
+              "AFTER_INPUT_CHANGE",
+              "TRANSIENT_ONLY",
+              "HOST_POLICY_ONLY"
+            ]
+          },
+          "component_path": {
+            "type": "array",
+            "maxItems": 12,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            }
+          }
+        }
+      }
+    },
+    "partial_output_ref": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "checks_performed",
+        "not_checked"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "NOT_RUN",
+            "PASSED",
+            "FAILED",
+            "PARTIAL"
+          ]
+        },
+        "checks_performed": {
+          "type": "array",
+          "maxItems": 40,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "not_checked": {
+          "type": "array",
+          "maxItems": 40,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "maxItems": 30,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        }
+      }
+    },
+    "next_action": {
+      "enum": [
+        "NONE",
+        "REQUEST_INPUT",
+        "RETRY_AFTER_CHANGE",
+        "USE_ALTERNATIVE",
+        "ESCALATE_TO_HUMAN",
+        "STOP"
+      ]
+    },
+    "resume_condition": {
+      "type": "string",
+      "maxLength": 1000
+    },
+    "alternative": {
+      "type": "string",
+      "maxLength": 1000
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "BLOCKED",
+              "UNSUPPORTED",
+              "FAILED",
+              "CLARIFICATION_REQUIRED"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "blockers": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "COMPLETED"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "blockers": {
+            "maxItems": 0
+          },
+          "next_action": {
+            "const": "NONE"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "FAILED"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "verification": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "FAILED",
+                  "NOT_RUN",
+                  "PARTIAL"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

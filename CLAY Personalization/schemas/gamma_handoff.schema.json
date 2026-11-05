@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Gamma Reference-Only Handoff",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "entry_id", "resource_id", "version", "resource_kind", "scope",
+    "content_digest", "source_ref", "source_status", "index_status",
+    "required_host_checks", "retrieval_authorized", "activation_authorized"
+  ],
+  "properties": {
+    "entry_id": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"},
+    "resource_id": {"type": "string", "minLength": 1, "maxLength": 256},
+    "version": {"type": "string", "minLength": 1, "maxLength": 64},
+    "resource_kind": {"type": "string", "minLength": 1, "maxLength": 64},
+    "scope": {"type": "string", "minLength": 1, "maxLength": 128},
+    "content_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_ref": {"type": "string", "minLength": 1, "maxLength": 2048},
+    "source_status": {"enum": ["VERIFIED", "UNVERIFIED"]},
+    "index_status": {"enum": ["CANDIDATE", "AVAILABLE", "RESOLVED"]},
+    "required_host_checks": {
+      "type": "array", "minItems": 6, "maxItems": 6, "uniqueItems": true,
+      "items": {"enum": ["SOURCE_AUTHENTICATION", "PERMISSION_CHECK", "CAPABILITY_CHECK", "COMPATIBILITY_CHECK", "SAFETY_POLICY_CHECK", "APPROVAL_IF_REQUIRED"]}
+    },
+    "retrieval_authorized": {"const": false},
+    "activation_authorized": {"const": false}
+  }
+}

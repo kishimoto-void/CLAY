@@ -1,0 +1,52 @@
+{
+  "schema_version": "clay/module-result/v1",
+  "module_id": "code.specialist",
+  "module_version": "0.1.0",
+  "status": "BLOCKED",
+  "summary": "The requested integration test could not be executed because this environment has no configured database service.",
+  "claims": [
+    {
+      "claim_id": "C1",
+      "statement": "No database service endpoint is configured in the current test environment.",
+      "epistemic_status": "OBSERVATION",
+      "scope": "Current execution environment"
+    },
+    {
+      "claim_id": "C2",
+      "statement": "The integration test may be run after a permitted database service is made available.",
+      "epistemic_status": "HYPOTHESIS",
+      "scope": "Proposed next environment"
+    }
+  ],
+  "assumptions": [],
+  "blockers": [
+    {
+      "code": "CAPABILITY_UNAVAILABLE",
+      "diagnosis_state": "CONFIRMED",
+      "explanation": "The test runner has no configured database service endpoint.",
+      "missing_requirements": [
+        "A reachable test database endpoint with approved test credentials."
+      ],
+      "what_was_checked": [
+        "Inspected the test configuration; no database endpoint is defined."
+      ],
+      "retryability": "AFTER_INPUT_CHANGE"
+    }
+  ],
+  "partial_output_ref": "artifacts/static-test-summary.txt",
+  "verification": {
+    "status": "PARTIAL",
+    "checks_performed": [
+      "Static unit tests completed."
+    ],
+    "not_checked": [
+      "Database integration behavior."
+    ],
+    "evidence_refs": [
+      "test-log:static-suite"
+    ]
+  },
+  "next_action": "REQUEST_INPUT",
+  "resume_condition": "Provide a permitted test database endpoint and credentials through the host's approved secret mechanism.",
+  "alternative": "Continue with static checks and mocked repository tests; these do not establish live database integration behavior."
+}

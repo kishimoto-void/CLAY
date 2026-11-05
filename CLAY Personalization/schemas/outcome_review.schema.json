@@ -1,0 +1,485 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:clay:outcome-review:v1",
+  "title": "CLAY Outcome Review v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "review_id",
+    "created_at",
+    "task_ref",
+    "scope",
+    "goal",
+    "success_criteria",
+    "process_review",
+    "outcome",
+    "observed_result",
+    "evidence_refs",
+    "contributing_factors",
+    "learnings",
+    "next_action",
+    "adaptation",
+    "review_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "clay/outcome-review/v1"
+    },
+    "review_id": {
+      "type": "string",
+      "pattern": "^aar-[0-9]{6,}$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "task_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "scope": {
+      "enum": [
+        "TURN",
+        "TASK_ATTEMPT",
+        "TASK_SERIES",
+        "PROJECT_CHECKPOINT"
+      ]
+    },
+    "goal": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "success_criteria": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "criterion_id",
+          "description",
+          "state"
+        ],
+        "properties": {
+          "criterion_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]{1,80}$"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "state": {
+            "enum": [
+              "MET",
+              "NOT_MET",
+              "UNKNOWN",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          }
+        }
+      }
+    },
+    "outcome": {
+      "enum": [
+        "SUCCESS",
+        "PARTIAL",
+        "FAILURE",
+        "BLOCKED",
+        "ABORTED",
+        "UNOBSERVED"
+      ]
+    },
+    "observed_result": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 3000
+    },
+    "process_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assessment",
+        "observations"
+      ],
+      "properties": {
+        "assessment": {
+          "enum": [
+            "SOUND",
+            "MIXED",
+            "WEAK",
+            "UNDETERMINED",
+            "NOT_ASSESSED"
+          ]
+        },
+        "observations": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "area",
+              "assessment",
+              "description"
+            ],
+            "properties": {
+              "area": {
+                "enum": [
+                  "PREPARATION",
+                  "ASSUMPTIONS",
+                  "EXECUTION",
+                  "COMMUNICATION",
+                  "RESOURCE_USE",
+                  "VERIFICATION",
+                  "RECOVERY",
+                  "COORDINATION",
+                  "OTHER"
+                ]
+              },
+              "assessment": {
+                "enum": [
+                  "EFFECTIVE",
+                  "GAP",
+                  "MIXED",
+                  "UNKNOWN",
+                  "NOT_APPLICABLE"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1500
+              },
+              "evidence_refs": {
+                "type": "array",
+                "maxItems": 30,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 500
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      }
+    },
+    "contributing_factors": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "factor_id",
+          "description",
+          "epistemic_status",
+          "locus"
+        ],
+        "properties": {
+          "factor_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]{1,80}$"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500
+          },
+          "epistemic_status": {
+            "enum": [
+              "OBSERVED_FACTOR",
+              "SUPPORTED_INFERENCE",
+              "HYPOTHESIS",
+              "UNKNOWN"
+            ]
+          },
+          "locus": {
+            "enum": [
+              "LLM_ACTION",
+              "MODULE_OR_TOOL",
+              "USER_DECISION",
+              "SHARED_PROCESS",
+              "ENVIRONMENT",
+              "EXTERNAL_ACTOR",
+              "RANDOM_OR_UNDETERMINED",
+              "UNCLASSIFIED"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          }
+        }
+      }
+    },
+    "learnings": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "statement",
+          "scope"
+        ],
+        "properties": {
+          "kind": {
+            "enum": [
+              "EFFECTIVE_PATTERN",
+              "GAP",
+              "BOUNDARY",
+              "UNKNOWN"
+            ]
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500
+          },
+          "scope": {
+            "enum": [
+              "THIS_ATTEMPT",
+              "CURRENT_TASK",
+              "SESSION",
+              "GENERAL_CANDIDATE"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          }
+        }
+      }
+    },
+    "next_action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action",
+        "description",
+        "expected_observation"
+      ],
+      "properties": {
+        "action": {
+          "enum": [
+            "RETRY_AFTER_CHANGE",
+            "RUN_DISCRIMINATING_TEST",
+            "REQUEST_INPUT",
+            "CHANGE_METHOD",
+            "REDUCE_SCOPE",
+            "ESCALATE_TO_HUMAN",
+            "STOP",
+            "NONE"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1500
+        },
+        "expected_observation": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1500
+        },
+        "depends_on_new_condition": {
+          "type": "boolean"
+        }
+      }
+    },
+    "adaptation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_layer",
+        "scope",
+        "change",
+        "approval_required",
+        "applied"
+      ],
+      "properties": {
+        "target_layer": {
+          "enum": [
+            "NONE",
+            "RESPONSE_LOCAL",
+            "TASK_STRATEGY",
+            "BEHAVIOR_PROFILE_PROPOSAL"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "NONE",
+            "CURRENT_TURN",
+            "CURRENT_TASK",
+            "SESSION",
+            "PENDING_USER_CONFIRMATION"
+          ]
+        },
+        "change": {
+          "type": "string",
+          "maxLength": 1500
+        },
+        "approval_required": {
+          "type": "boolean"
+        },
+        "applied": {
+          "type": "boolean"
+        }
+      }
+    },
+    "review_status": {
+      "enum": [
+        "DRAFT",
+        "ACCEPTED",
+        "REJECTED",
+        "DEFERRED"
+      ]
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 2000
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "adaptation": {
+            "properties": {
+              "target_layer": {
+                "const": "BEHAVIOR_PROFILE_PROPOSAL"
+              }
+            },
+            "required": [
+              "target_layer"
+            ]
+          }
+        },
+        "required": [
+          "adaptation"
+        ]
+      },
+      "then": {
+        "properties": {
+          "adaptation": {
+            "properties": {
+              "scope": {
+                "const": "PENDING_USER_CONFIRMATION"
+              },
+              "approval_required": {
+                "const": true
+              },
+              "applied": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adaptation": {
+            "properties": {
+              "target_layer": {
+                "const": "NONE"
+              }
+            },
+            "required": [
+              "target_layer"
+            ]
+          }
+        },
+        "required": [
+          "adaptation"
+        ]
+      },
+      "then": {
+        "properties": {
+          "adaptation": {
+            "properties": {
+              "scope": {
+                "const": "NONE"
+              },
+              "change": {
+                "maxLength": 0
+              },
+              "approval_required": {
+                "const": false
+              },
+              "applied": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "ABORTED"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "learnings": {
+            "items": {
+              "properties": {
+                "scope": {
+                  "not": {
+                    "const": "GENERAL_CANDIDATE"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

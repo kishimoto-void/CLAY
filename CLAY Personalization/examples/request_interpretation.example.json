@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.2",
+  "task_mode": "verify",
+  "goal": "Review a code sample, report material issues, and make changes only when the user explicitly asks for edits and the files are available.",
+  "requirements": [
+    {
+      "id": "REQ-01",
+      "text": "Report material problems",
+      "priority": "must",
+      "source": "explicit"
+    },
+    {
+      "id": "REQ-02",
+      "text": "Apply changes only if explicitly requested and permitted",
+      "priority": "must",
+      "source": "explicit"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "CON-01",
+      "text": "Keep the report concise",
+      "source": "explicit"
+    }
+  ],
+  "exclusions": [
+    {
+      "id": "EX-01",
+      "text": "Do not produce an extensive expert-style essay",
+      "source": "explicit"
+    }
+  ],
+  "context_refs": [],
+  "assumptions": [
+    {
+      "id": "ASM-01",
+      "statement": "The requested review should focus on problems, not a broad tutorial.",
+      "confidence": "high",
+      "impact": "low",
+      "source": "explicit_context"
+    }
+  ],
+  "open_questions": [],
+  "resource_requests": [],
+  "output_contract": [
+    "concise_issue_list",
+    "change_summary_if_modified",
+    "actual_test_status"
+  ],
+  "verification": [
+    "Do not claim edits or tests unless completed and confirmed."
+  ],
+  "readiness": "READY",
+  "readiness_reason": null,
+  "note": "Illustrative task interpretation only; not a trace of hidden reasoning and not proof of execution."
+}

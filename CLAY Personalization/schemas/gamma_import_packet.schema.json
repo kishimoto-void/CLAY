@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://top-mold.invalid/schemas/gamma_import_packet.schema.json",
+  "title": "Gamma Index Task-Profile Import Packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request",
+    "retrieval",
+    "integrity",
+    "host_checks",
+    "profile"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "top-mold/gamma-import-packet/1.0"
+    },
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request_id",
+        "requested_profile_id",
+        "selection_source",
+        "activation_scope",
+        "activation_intent",
+        "requested_task_mode"
+      ],
+      "properties": {
+        "request_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._-]{3,96}$"
+        },
+        "requested_profile_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{2,127}$"
+        },
+        "requested_profile_version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "selection_source": {
+          "const": "explicit_user_request"
+        },
+        "activation_scope": {
+          "const": "current_task_session"
+        },
+        "activation_intent": {
+          "enum": [
+            "activate_after_validation",
+            "inspect_only"
+          ]
+        },
+        "requested_task_mode": {
+          "enum": [
+            "work",
+            "verify",
+            "design",
+            "research",
+            "chat"
+          ]
+        }
+      }
+    },
+    "retrieval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "resource_ref",
+        "retrieval_status",
+        "retrieved_at"
+      ],
+      "properties": {
+        "provider": {
+          "const": "gamma_index"
+        },
+        "resource_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "retrieval_status": {
+          "enum": [
+            "received",
+            "not_found",
+            "unavailable",
+            "failed"
+          ]
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "returned_etag": {
+          "type": "string",
+          "maxLength": 256
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "profile_sha256"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "sha256-canonical-json-v1"
+        },
+        "profile_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "host_checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_authentication",
+        "resource_access",
+        "permission",
+        "required_capabilities"
+      ],
+      "properties": {
+        "source_authentication": {
+          "enum": [
+            "not_checked",
+            "verified_by_host",
+            "unverified",
+            "failed"
+          ]
+        },
+        "resource_access": {
+          "enum": [
+            "not_checked",
+            "confirmed_by_host",
+            "unavailable",
+            "failed"
+          ]
+        },
+        "permission": {
+          "enum": [
+            "not_checked",
+            "approved_by_host",
+            "not_required_by_host",
+            "pending",
+            "denied"
+          ]
+        },
+        "evidence_ref": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "required_capabilities": {
+          "enum": [
+            "not_checked",
+            "satisfied_by_host",
+            "missing"
+          ]
+        }
+      }
+    },
+    "profile": {
+      "type": "object"
+    }
+  }
+}

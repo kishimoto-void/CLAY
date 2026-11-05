@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Delta Captured Observation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["observation_id", "snapshot", "captured_at", "event_id"],
+  "properties": {
+    "observation_id": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"},
+    "snapshot": {
+      "type": "object", "additionalProperties": false,
+      "required": ["target_id", "version", "digest", "source_ref", "observed_at"],
+      "properties": {
+        "target_id": {"type": "string", "minLength": 1, "maxLength": 256},
+        "version": {"type": "string", "minLength": 1, "maxLength": 64},
+        "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "source_ref": {"type": "string", "minLength": 1, "maxLength": 2048},
+        "observed_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "captured_at": {"type": "string", "format": "date-time"},
+    "event_id": {"type": ["string", "null"], "pattern": "^delta-[0-9]{6,}$"}
+  }
+}

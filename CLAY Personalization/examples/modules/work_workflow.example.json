@@ -1,0 +1,94 @@
+{
+  "schema_version": "clay/module-manifest/v1",
+  "module_id": "work.workflow",
+  "name": "CLAY Work Workflow (synthetic contract example)",
+  "module_version": "0.1.0",
+  "kind": "workflow",
+  "purpose": "Support structured work tasks such as planning, drafting, tracking, and reporting, with explicit status and blockers.",
+  "capabilities": [
+    {
+      "capability_id": "work.plan",
+      "description": "Break work into bounded steps, dependencies, and acceptance conditions."
+    },
+    {
+      "capability_id": "work.draft",
+      "description": "Prepare requested workplace documents from supplied facts and constraints."
+    },
+    {
+      "capability_id": "work.status_report",
+      "description": "Distinguish proposed, pending, executed, and verified outcomes."
+    }
+  ],
+  "out_of_scope": [
+    "Making external commitments without approval",
+    "Inventing missing business facts or stakeholder decisions",
+    "Treating a concise persona as permission to skip material verification"
+  ],
+  "implementation_modes": [
+    "single_model",
+    "deterministic_code",
+    "external_tool",
+    "human_in_loop",
+    "hybrid"
+  ],
+  "inputs": [
+    {
+      "name": "goal",
+      "required": true,
+      "description": "Work objective and intended deliverable."
+    },
+    {
+      "name": "constraints",
+      "required": false,
+      "description": "Deadline, format, policy, roles, and acceptance criteria."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "work_product",
+      "description": "Requested draft, plan, or structured result."
+    },
+    {
+      "name": "status",
+      "description": "Completed, partial, blocked, or clarification-required state."
+    }
+  ],
+  "dependencies": [],
+  "clay_core_range": "0.4.x",
+  "risk_class": "moderate",
+  "verification_requirements": [
+    "Preserve source facts and label assumptions.",
+    "Identify missing dependencies and approvals.",
+    "Do not present proposed work as executed or verified."
+  ],
+  "behavior_profile": {
+    "separate_from_capability": true,
+    "supported_controls": [
+      "tone",
+      "verbosity",
+      "format",
+      "initiative",
+      "question_frequency",
+      "collaboration_style"
+    ],
+    "may_override_common_core": false
+  },
+  "authority": {
+    "may_grant_permissions": false,
+    "may_modify_common_core": false,
+    "may_disable_safety_plane": false,
+    "external_action_default": "forbidden_without_host_approval"
+  },
+  "data_handling": {
+    "default_scope": "task_only",
+    "persistent_personal_data": false
+  },
+  "failure_contract": {
+    "declares_typed_blockers": true,
+    "retry_policy": "bounded_host_policy",
+    "partial_results_supported": true
+  },
+  "notes": [
+    "Synthetic example only; the module does not send email, change tickets, or commit external actions by itself."
+  ]
+}

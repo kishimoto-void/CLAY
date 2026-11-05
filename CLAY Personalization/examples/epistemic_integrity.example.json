@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.2",
+  "task_mode": "verify",
+  "goal": "Compare two synthetic source claims while preserving the transformation history.",
+  "context_refs": [
+    {
+      "ref": "synthetic://source-A",
+      "availability": "available",
+      "required_for_goal": true,
+      "role": "source",
+      "evidence_ref": "fixture:source-A"
+    },
+    {
+      "ref": "synthetic://ocr-output",
+      "availability": "available",
+      "required_for_goal": true,
+      "role": "resource",
+      "evidence_ref": "fixture:ocr-output"
+    },
+    {
+      "ref": "synthetic://source-B",
+      "availability": "available",
+      "required_for_goal": true,
+      "role": "source",
+      "evidence_ref": "fixture:source-B"
+    }
+  ],
+  "transformations": [
+    {
+      "id": "T-001",
+      "source_ref": "synthetic://source-A",
+      "output_ref": "synthetic://ocr-output",
+      "operation": "ocr",
+      "fidelity": "potentially_lossy"
+    }
+  ],
+  "conflicts": [
+    {
+      "id": "C-001",
+      "topic": "synthetic status field",
+      "status": "unresolved",
+      "blocking": true,
+      "claims": [
+        {
+          "statement": "status=ACTIVE",
+          "source_ref": "synthetic://source-A"
+        },
+        {
+          "statement": "status=INACTIVE",
+          "source_ref": "synthetic://source-B"
+        }
+      ]
+    }
+  ],
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Which source or rule has precedence?",
+      "blocking": true,
+      "why_it_matters": "The conflicting values change the requested conclusion."
+    }
+  ],
+  "readiness": "CLARIFICATION_REQUIRED",
+  "note": "Synthetic fixture only. Source payloads are intentionally not embedded."
+}

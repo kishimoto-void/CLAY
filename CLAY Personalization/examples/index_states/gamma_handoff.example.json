@@ -1,0 +1,21 @@
+{
+  "entry_id": "module.fishing.basic",
+  "resource_id": "fishing.basic",
+  "version": "1.0.0",
+  "resource_kind": "context_module",
+  "scope": "fishing",
+  "content_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "source_ref": "repo://modules/fishing.basic@1.0.0",
+  "source_status": "UNVERIFIED",
+  "index_status": "CANDIDATE",
+  "required_host_checks": [
+    "SOURCE_AUTHENTICATION",
+    "PERMISSION_CHECK",
+    "CAPABILITY_CHECK",
+    "COMPATIBILITY_CHECK",
+    "SAFETY_POLICY_CHECK",
+    "APPROVAL_IF_REQUIRED"
+  ],
+  "retrieval_authorized": false,
+  "activation_authorized": false
+}

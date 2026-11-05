@@ -1,0 +1,72 @@
+{
+  "schema_version": "top-mold/evidence-bundle/v0.1",
+  "bundle_id": "SYNTHETIC-APPEARANCE-001",
+  "claim": {
+    "claim_id": "CLAIM-01",
+    "statement": "Person A has been evaluated favorably for visual presentation in the named contexts.",
+    "claim_type": "observable_fact",
+    "scope": "The named contest and the specified modeling assignments only; not a universal claim about beauty.",
+    "time_scope": "The event and assignment dates stated in the synthetic records."
+  },
+  "evidence": [
+    {
+      "evidence_id": "E-SELF-01",
+      "relation": "contextualizes",
+      "source_kind": "self_report",
+      "observation_axis": "self_report",
+      "source_ref": "synthetic://person-a/self-description",
+      "observed_at": null,
+      "scope": "Person A's self-perception at the time of statement.",
+      "independence_group_id": "SELF-REPORT-GROUP",
+      "relevance": "indirect",
+      "reliability_note": "Direct evidence of self-perception, not independent evidence of an external evaluation.",
+      "limitations": [
+        "Does not establish a universal or objective attractiveness standard."
+      ],
+      "notes": "Self-report is retained without being promoted to an externally verified fact."
+    },
+    {
+      "evidence_id": "E-AWARD-01",
+      "relation": "supports",
+      "source_kind": "institutional_record",
+      "observation_axis": "institutional_outcome",
+      "source_ref": "synthetic://contest-x/official-results",
+      "observed_at": "2025-06-15T00:00:00Z",
+      "scope": "Award under Contest X rules, judges, year, and participant pool.",
+      "independence_group_id": "CONTEST-X-SELECTION",
+      "relevance": "direct",
+      "reliability_note": "Official result record for the narrow claim that the award was received.",
+      "limitations": [
+        "Judging criteria and participant pool are limited to Contest X.",
+        "Does not establish universal beauty."
+      ],
+      "notes": "Strong support for receipt of this specific award, not for a universal aesthetic proposition."
+    },
+    {
+      "evidence_id": "E-WORK-01",
+      "relation": "supports",
+      "source_kind": "third_party_report",
+      "observation_axis": "independent_third_party",
+      "source_ref": "synthetic://client-y/assignment-confirmation",
+      "observed_at": "2025-08-01T00:00:00Z",
+      "scope": "Selection for a specified modeling assignment by Client Y.",
+      "independence_group_id": "CLIENT-Y-SELECTION",
+      "relevance": "direct",
+      "reliability_note": "Supports selection for this assignment if the record is authentic.",
+      "limitations": [
+        "Selection may reflect market, brand, availability, or other criteria.",
+        "Independence from Contest X must be checked rather than assumed."
+      ],
+      "notes": "Do not infer the reason for selection beyond what the record states."
+    }
+  ],
+  "assessment": {
+    "state": "SUPPORTED",
+    "rationale": "The synthetic records support a bounded claim of favorable selection in two named contexts. The self-report separately supports Person A's self-perception. Evidence sources are not automatically independent merely because they have different labels.",
+    "generalization_boundary": "No conclusion about universal, culture-independent, or objectively absolute beauty is justified.",
+    "open_questions": [
+      "Are the contest and client selection processes independent?",
+      "What exact criteria did each process apply?"
+    ]
+  }
+}

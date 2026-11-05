@@ -1,0 +1,98 @@
+{
+  "schema_version": "clay/outcome-review/v1",
+  "review_id": "aar-000001",
+  "created_at": "2026-11-04T12:00:00+09:00",
+  "task_ref": "example:package-test-attempt-01",
+  "scope": "TASK_ATTEMPT",
+  "goal": "Validate the package against the declared local test suite.",
+  "success_criteria": [
+    {
+      "criterion_id": "tests.pass",
+      "description": "All targeted unit and contract tests pass.",
+      "state": "NOT_MET",
+      "evidence_refs": [
+        "test-log:example-01"
+      ]
+    },
+    {
+      "criterion_id": "claim.accurate",
+      "description": "Report only tests actually executed.",
+      "state": "MET",
+      "evidence_refs": [
+        "test-log:example-01"
+      ]
+    }
+  ],
+  "outcome": "FAILURE",
+  "observed_result": "One targeted test failed because the test expected an obsolete contract field. The remaining test outcomes are preserved in the referenced log.",
+  "evidence_refs": [
+    "test-log:example-01"
+  ],
+  "contributing_factors": [
+    {
+      "factor_id": "factor.path",
+      "description": "The failing assertion references a field name that is absent from the current schema.",
+      "epistemic_status": "OBSERVED_FACTOR",
+      "locus": "LLM_ACTION",
+      "evidence_refs": [
+        "test-log:example-01",
+        "schema:outcome_review.schema.json"
+      ]
+    },
+    {
+      "factor_id": "factor.cause",
+      "description": "The mismatch may have resulted from carrying forward an obsolete assumption; confirm against the canonical specification before editing.",
+      "epistemic_status": "HYPOTHESIS",
+      "locus": "SHARED_PROCESS",
+      "evidence_refs": []
+    }
+  ],
+  "learnings": [
+    {
+      "kind": "GAP",
+      "statement": "Check current schema and contract version before writing an assertion; do not infer field names from an earlier release.",
+      "scope": "CURRENT_TASK",
+      "evidence_refs": [
+        "test-log:example-01",
+        "schema:outcome_review.schema.json"
+      ]
+    }
+  ],
+  "next_action": {
+    "action": "RUN_DISCRIMINATING_TEST",
+    "description": "Inspect the canonical schema and reproduce the failing assertion in isolation, then update only the stale expectation.",
+    "expected_observation": "The isolated test passes against the canonical current-version schema without weakening validation.",
+    "depends_on_new_condition": false
+  },
+  "adaptation": {
+    "target_layer": "TASK_STRATEGY",
+    "scope": "CURRENT_TASK",
+    "change": "Verify current-version schema paths before editing tests.",
+    "approval_required": false,
+    "applied": false
+  },
+  "review_status": "DRAFT",
+  "notes": "Synthetic fixture only. The hypothesis is not presented as a confirmed root cause.",
+  "process_review": {
+    "assessment": "MIXED",
+    "observations": [
+      {
+        "area": "ASSUMPTIONS",
+        "assessment": "GAP",
+        "description": "The test assertion carried forward an obsolete contract expectation instead of checking the current schema first.",
+        "evidence_refs": [
+          "test-log:example-01",
+          "schema:outcome_review.schema.json"
+        ]
+      },
+      {
+        "area": "VERIFICATION",
+        "assessment": "EFFECTIVE",
+        "description": "The failure was isolated and the executed test output was retained.",
+        "evidence_refs": [
+          "test-log:example-01"
+        ]
+      }
+    ]
+  }
+}

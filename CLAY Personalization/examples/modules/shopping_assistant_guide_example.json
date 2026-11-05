@@ -1,0 +1,100 @@
+{
+  "schema_version": "clay/module-manifest/v1",
+  "module_id": "shopping.assistant",
+  "name": "Shopping Assistant Example",
+  "module_version": "0.1.0",
+  "kind": "domain_specialist",
+  "purpose": "Compare product candidates against user-provided needs, budget, durability, usability, and maintenance considerations.",
+  "capabilities": [
+    {
+      "capability_id": "shopping.compare",
+      "description": "Compare supplied or actually retrieved product candidates against explicit user criteria."
+    },
+    {
+      "capability_id": "shopping.discover",
+      "description": "Suggest additional candidate categories or search directions without claiming retrieval was performed."
+    }
+  ],
+  "out_of_scope": [
+    "Making a purchase or payment",
+    "Claiming current prices or stock without a current source",
+    "Granting itself external tool permissions",
+    "Persistently storing personal information"
+  ],
+  "implementation_modes": [
+    "single_model",
+    "external_tool",
+    "human_in_loop",
+    "hybrid"
+  ],
+  "inputs": [
+    {
+      "name": "user_goal",
+      "required": true,
+      "description": "The item or outcome the user is considering."
+    },
+    {
+      "name": "constraints",
+      "required": false,
+      "description": "Budget, location, compatibility, size, timing, or other user-stated constraints."
+    },
+    {
+      "name": "candidate_products",
+      "required": false,
+      "description": "Product candidates actually supplied by the user or retrieved through an available source."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "comparison",
+      "description": "A comparison of candidates against stated criteria, with missing information identified."
+    },
+    {
+      "name": "recommendation_options",
+      "description": "A bounded set of suitable options and trade-offs; the user retains the purchase decision."
+    },
+    {
+      "name": "verification_record",
+      "description": "Sources checked, details not verified, and any execution or retrieval limitations."
+    }
+  ],
+  "dependencies": [],
+  "clay_core_range": "0.4.x",
+  "risk_class": "moderate",
+  "verification_requirements": [
+    "Separate user-stated constraints from inferred preferences.",
+    "Do not state current price, availability, or specifications without a current source.",
+    "Do not claim a search or purchase occurred unless its result is observed.",
+    "Keep purchase and payment decisions with the user."
+  ],
+  "behavior_profile": {
+    "separate_from_capability": true,
+    "supported_controls": [
+      "verbosity",
+      "format",
+      "initiative",
+      "question_frequency",
+      "collaboration_style"
+    ],
+    "may_override_common_core": false
+  },
+  "authority": {
+    "may_grant_permissions": false,
+    "may_modify_common_core": false,
+    "may_disable_safety_plane": false,
+    "external_action_default": "forbidden_without_host_approval"
+  },
+  "data_handling": {
+    "default_scope": "task_only",
+    "persistent_personal_data": false
+  },
+  "failure_contract": {
+    "declares_typed_blockers": true,
+    "retry_policy": "bounded_host_policy",
+    "partial_results_supported": true
+  },
+  "notes": [
+    "Illustrative manifest for the CLAY v0.4.3 module contract.",
+    "The manifest is declarative. The current package does not automatically discover, load, or execute this module."
+  ]
+}
