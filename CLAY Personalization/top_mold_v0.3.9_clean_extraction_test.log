@@ -1,0 +1,12 @@
+Top Mold v0.3.9 clean archive extraction check
+
+Archive extracted successfully into a fresh temporary directory.
+- Unit/structural suite: 189/189 PASS (189 tests, clean extracted copy).
+- JSON parsing and evidence schema/example: PASS (26 JSON documents; evidence probability-basis guard verified).
+- Gamma/Delta/Safety topology: PASS, 0 violations; execution NOT_INVOKED.
+- Request-envelope destructive probe matrix: 33/33 PASS.
+- Request envelope example: PASS.
+- Epistemic-integrity example: PASS.
+- Gamma profile plan validator: VALIDATED_HOST_CHECKS_REQUIRED; EXECUTION NOT_INVOKED; ACTIVATION NOT_ACTIVATED.
+
+This confirms package integrity and deterministic local contract behavior after extraction. It does not test live LLM behavior, semantic truth, source authenticity, performance uplift, production safety, or user experience.
